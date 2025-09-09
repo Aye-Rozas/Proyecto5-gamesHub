@@ -1,0 +1,44 @@
+.tablero{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(3,1fr);
+  width: 90vw;
+  max-width: 25rem;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+.celda{
+  background-color: var(--pr5-color-3);
+  padding: var(--pr5-padding-s);
+  border: 2px solid var(--pr5-color-1);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.celda>img{
+  width: 80%;
+  max-width: 5rem;
+}
+.mensaje {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.puntuacion{
+  display: flex;
+  justify-content: center;
+  gap: var(--pr5-gap-xs);
+  font-weight: bold;
+}
+.puntuacion p{
+  margin: 0;
+}
+/*
+@media (max-width:450px){
+  .tablero{
+    width: 15rem;
+    height: 15rem;
+  }
+}*/

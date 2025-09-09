@@ -1,0 +1,17 @@
+header {
+  background-color: var(--heading);
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+header button {
+  background-color: var(--pr5-color-1);
+  color: var(--pr5-color-2);
+  font-size: 1rem;
+  padding: var(--pr5-padding-xs);
+  border-radius: var(--pr5-br);
+  border: none;
+  cursor: pointer;
+}

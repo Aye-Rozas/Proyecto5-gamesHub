@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+:root {
+  /*FONTS*/
+  --pr5-primary-font: 'Righteous';
+  /*BRANDING COLORS*/
+  --pr5-color-1: #fe6d5d;
+  --pr5-color-2: #6b5b95;
+  --pr5-color-3: #87af4b;
+  --pr5-color-4: #f7cbca;
+  --pr5-color-5: #93a9d2;
+  /*BACKGROUND-COLORS*/
+  --heading: var(--pr5-color-5);
+  --body: var(--pr5-color-4);
+  /*BORDER RADIUS */
+  --pr5-br: 12px;
+  /*SPACINGS*/
+  --pr5-padding-xs: 0.5rem;
+  --pr5-padding-s: 1rem;
+  --pr5-padding-m: 2rem;
+
+  --pr5-margin-xs: 0.5rem;
+  --pr5-margin-s: 1rem;
+  --pr5-margin-m: 2rem;
+
+  --pr5-gap-xs: 0.5rem;
+  --pr5-gap-s: 1rem;
+  --pr5-gap-m: 2rem;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+body {
+  font-family: 'Righteous';
+  background-color: var(--body);
+  color: var(--pr5-color-2);
+}
+main{
+    height: calc(100vh - 80px - 40px);
+}
+.content{
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: url('./src/components//Pages/Plaf/assets/gato.png'), auto;
+}
