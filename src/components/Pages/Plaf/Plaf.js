@@ -22,10 +22,14 @@ export const initPlaf = () => {
 
   const puntosDiv = document.createElement('div');
   puntosDiv.className = 'puntuacionPlaf';
-  puntosDiv.innerHTML = `
+  puntosDiv.innerHTML =
+  `
+  <p>Ganadas: <span id="ganadas">${puntuacionPlaf.ganadas}</span></p>
+  <p>Perdidas: <span id="perdidas">${puntuacionPlaf.perdidas}</span></p>
+` /*`
   <p>Ganadas: <span id="ganadas">0</span></p>
   <p>Perdidas:<span id="perdidas">0</span></p>
-  `;
+  `*/;
 
   const divCity = document.createElement('div');
   divCity.style.backgroundImage = `url(${fondo})`;
