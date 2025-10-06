@@ -8,7 +8,7 @@
   margin: 0 auto;
 }
 .celda{
-  background-color: var(--pr5-color-3);
+  background-color: var(--pr5-color-2);
   padding: var(--pr5-padding-s);
   border: 2px solid var(--pr5-color-1);
   display: flex;
@@ -35,10 +35,3 @@
 .puntuacion p{
   margin: 0;
 }
-/*
-@media (max-width:450px){
-  .tablero{
-    width: 15rem;
-    height: 15rem;
-  }
-}*/

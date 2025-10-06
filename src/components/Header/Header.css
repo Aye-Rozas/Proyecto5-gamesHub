@@ -8,7 +8,7 @@ header {
 }
 header button {
   background-color: var(--pr5-color-1);
-  color: var(--pr5-color-2);
+  color: var(--pr5-color-5);
   font-size: 1rem;
   padding: var(--pr5-padding-xs);
   border-radius: var(--pr5-br);

@@ -1,61 +1,38 @@
 import './PPT.css';
-import piedraImg from './assets/piedra.png';
-import papelImg from './assets/papel.png';
-import tijerasImg from './assets/tijeras.png';
+import { opciones } from './constants/opciones';
+import { crearEstadoInicial } from './logic/estado';
+import { juegaPC, determinarResultado } from './logic/gamelogic';
+import { crearPuntuacion, actualizarPuntuacion } from '../../puntuacion/puntuacion';
+import { mostrarMensaje } from './components/mensaje';
+import { crearBotones} from './components/botones';
+import { guardarEstadisticas, obtenerEstadisticas } from '../../../utils/estadisticasJuego';
 
-const opciones = [
-  { nombre: 'piedra', img: piedraImg },
-  { nombre: 'papel', img: papelImg },
-  { nombre: 'tijeras', img: tijerasImg },
-];
-let puntuacionPPT = JSON.parse(localStorage.getItem('puntuacionPPT')) || {
-  ganadas: 0,
-  perdidas: 0,
-  empates: 0,
-};
-let gameoverPPT = false;
+let { puntuacion, gameOver } = crearEstadoInicial();
+puntuacion = obtenerEstadisticas('ppt');
+
 export const initPPT = () => {
+  puntuacion = obtenerEstadisticas('ppt'); 
+  gameOver=false;
+
   const divContent = document.querySelector('.content');
   divContent.innerHTML = '';
-
-  const puntuacionDiv = document.createElement('div');
-  puntuacionDiv.className = 'puntuacionPPT';
-  puntuacionDiv.innerHTML = `
-<p>Ganadas: <span id="ganadas">0</span></p>
-<p>Perdidas:<span id="perdidas">0</span></p>
-<p>Empates: <span id="empates">0</span></p>
-  `;
-  divContent.append(puntuacionDiv);
+divContent.append(crearPuntuacion(puntuacion));
 
   const eleccionPcDiv = document.createElement('div');
   eleccionPcDiv.className = 'eleccionPc';
   divContent.append(eleccionPcDiv);
 
-  const pipati = document.createElement('div');
-  pipati.className = 'pipati';
+  divContent.append(crearBotones(opciones,jugador));
 
-  for (const opcion of opciones) {
-    const { nombre, img } = opcion;
-    const button = document.createElement('button');
-    button.className = 'buttonT';
-    button.dataset.eleccion = nombre;
-
-    const imagen = document.createElement('img');
-    imagen.className = 'imgT';
-    imagen.src = img;
-
-    button.append(imagen);
-    button.addEventListener('click', jugador);
-    pipati.append(button);
-  }
-
-  divContent.append(pipati);
-  actualizarPuntuacion();
+  actualizarPuntuacion(puntuacion);
 };
 
 const jugador = (event) => {
+  if(gameOver) return;
+
   const eleccionJugador = event.currentTarget.dataset.eleccion;
   const eleccionPc = juegaPC(opciones);
+
   const divContent = document.querySelector('.content');
   const eleccionPcDiv = divContent.querySelector('.eleccionPc');
   eleccionPcDiv.innerHTML = '';
@@ -64,55 +41,32 @@ const jugador = (event) => {
   imgPc.src = eleccionPc.img;
   imgPc.className = 'imgPc';
   eleccionPcDiv.append(imgPc);
+
   const texto = document.createElement('p');
   texto.textContent = `La máquina eligió: ${eleccionPc.nombre}`;
   eleccionPcDiv.append(texto);
 
-  if (
-    (eleccionJugador === 'piedra' && eleccionPc.nombre === 'tijeras') ||
-    (eleccionJugador === 'papel' && eleccionPc.nombre === 'piedra') ||
-    (eleccionJugador === 'tijeras' && eleccionPc.nombre === 'papel')
-  ) {
-    gameoverPPT = true;
-    mostrarMsj(`Ganaste! ${eleccionJugador} vence a ${eleccionPc.nombre} 🥳`);
-    puntuacionPPT.ganadas++;
-    localStorage.setItem('puntuacionPPT', JSON.stringify(puntuacionPPT));
-    actualizarPuntuacion();
-    setTimeout(initPPT, 2000);
-    return;
+    const resultado = determinarResultado(eleccionJugador, eleccionPc.nombre);
+
+  if (resultado==='win') {
+    mostrarMensaje(`Ganaste! ${eleccionJugador} vence a ${eleccionPc.nombre} 🥳`);
+    puntuacion.ganadas++;
   }
-  if (eleccionJugador === eleccionPc.nombre) {
-    gameoverPPT = true;
-    mostrarMsj(`Empate! Ambos eligieron ${eleccionJugador} 😅`);
-    puntuacionPPT.empates++;
-    localStorage.setItem('puntuacionPPT', JSON.stringify(puntuacionPPT));
-    actualizarPuntuacion();
-    setTimeout(initPPT, 2000);
-    return;
+else  if (resultado=== 'draw') {
+    mostrarMensaje(`Empate! Ambos eligieron ${eleccionJugador} 😅`);
+    puntuacion.empates++;
   }
 
-  gameoverPPT = false;
-  mostrarMsj(`Perdiste! ${eleccionPc.nombre} vence a ${eleccionJugador} 😥`);
-  puntuacionPPT.perdidas++;
-  localStorage.setItem('puntuacionPPT', JSON.stringify(puntuacionPPT));
-  actualizarPuntuacion();
+else{
+  mostrarMensaje(`Perdiste! ${eleccionPc.nombre} vence a ${eleccionJugador} 😥`);
+  puntuacion.perdidas++;}
+
+  guardarEstadisticas('ppt',puntuacion);
+  actualizarPuntuacion(puntuacion);
+  gameOver=true;
+  
   setTimeout(initPPT, 2000);
 };
-const juegaPC = (opciones) => {
-  const eleccionPc = opciones[Math.floor(Math.random() * opciones.length)];
-  return eleccionPc;
-};
 
-const mostrarMsj = (texto) => {
-  const divContent = document.querySelector('.content');
-  const msj = document.createElement('p');
-  msj.className = 'msj';
-  msj.textContent = texto;
-  divContent.prepend(msj);
-};
 
-const actualizarPuntuacion = () => {
-  document.getElementById('ganadas').textContent = puntuacionPPT.ganadas;
-  document.getElementById('perdidas').textContent = puntuacionPPT.perdidas;
-  document.getElementById('empates').textContent = puntuacionPPT.empates;
-};
+

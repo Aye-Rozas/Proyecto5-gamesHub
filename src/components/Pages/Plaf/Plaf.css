@@ -1,4 +1,4 @@
-.barra{
+.barra {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,21 +8,30 @@
   font-size: 1rem;
   flex-wrap: wrap;
 }
-.puntuacionPlaf{
+.puntuacionPlaf {
   display: flex;
   gap: 1rem;
   font-weight: bold;
-  font-size: 1rem;}
+  font-size: 1rem;
+}
 .city {
-  width: 90vw;               
-  max-width: 900px;         
-  height: 60vh;           
-  min-height: 300px; 
+  width: 90vw;
+  max-width: 900px;
+  height: 60vh;
+  min-height: 300px;
   position: relative;
-  margin: 0.5rem auto; 
+  margin: 0.5rem auto;
   border: 2px solid #333;
   overflow: hidden;
-  cursor: url('./assets/gato.png'), auto;
+  cursor: url("../../../assets/gato.png"), auto;
+}
+.Djaula {
+ position: absolute;
+  width: 130px;
+  height: 80px;
+  right: 5px;
+  bottom: 5px;
+  background-color: white;
 }
 .jaula {
   width: 120px;
@@ -30,7 +39,8 @@
   z-index: 999;
   right: 5px;
   bottom: 5px;
-  box-shadow: -23px -13px 32px 9px rgba(135,175,75,0.75);
+  box-shadow: -23px -13px 32px 9px rgba(135, 175, 75, 0.75);
+  object-fit: contain;
 }
 .raton {
   position: absolute;
@@ -63,3 +73,10 @@
   display: block;
 }
 
+@media (max-width: 400px) {
+  .city {
+    height: 50vh;
+    min-height: 250px;
+    margin-bottom: 1rem;
+  }
+}

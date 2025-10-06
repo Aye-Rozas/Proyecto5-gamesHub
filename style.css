@@ -3,14 +3,13 @@
   /*FONTS*/
   --pr5-primary-font: 'Righteous';
   /*BRANDING COLORS*/
-  --pr5-color-1: #fe6d5d;
-  --pr5-color-2: #6b5b95;
-  --pr5-color-3: #87af4b;
-  --pr5-color-4: #f7cbca;
-  --pr5-color-5: #93a9d2;
+  --pr5-color-1: #d1fe2d;
+  --pr5-color-2: #057f1b;
+  --pr5-color-3: #f0facb;
+  --pr5-color-4: #261893;
   /*BACKGROUND-COLORS*/
-  --heading: var(--pr5-color-5);
-  --body: var(--pr5-color-4);
+  --heading: var(--pr5-color-4);
+  --body: var(--pr5-color-3);
   /*BORDER RADIUS */
   --pr5-br: 12px;
   /*SPACINGS*/
@@ -35,16 +34,24 @@
 body {
   font-family: 'Righteous';
   background-color: var(--body);
-  color: var(--pr5-color-2);
+  color: var(--pr5-color-4);
 }
 main{
     height: calc(100vh - 80px - 40px);
 }
 .content{
-  margin-top: 2rem;
+ margin: rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  cursor: url('./src/components//Pages/Plaf/assets/gato.png'), auto;
+  cursor: url('./src/assets/gato.png'), auto;
+  min-height: calc(100vh - 200px);
+}
+.portada{
+  width: 100vh;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
